@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">WikiMaps</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="api_key">AIzaSyDjvMQ6MJ78Owsg6mN6KikWaf9tH5YjOVU</string>
+    <string name="search">Search for nearby</string>
+    <string name="loading_list_items">Load More Items</string>
+    <string name="open_maps">Navigate to Location</string>
+    <string name="open_page">Open page on Wiki site</string>
+    <string name="show_on_map">Show on maps</string>
+    <string name="more_results">Load more results</string>
+    <string name="open_new_tab">Open in new tab</string>
+    <string name="distance">Distance: </string>
+    <string name="navigate">Navigate to destination</string>
+    <string name="nearby">Nearby</string>
+    <string name="likes">Favorites</string>
+    <string name="history">History</string>
+    <string name="erase">Remove from favorites</string>
+    <string name="search_in_list">search</string>
+    <string name="add_to_fav">Add to my favorites</string>
+    <string name="header_title_favorites">Favorites List</string>
+    <string name="header_title_history">History List</string>
+</resources>

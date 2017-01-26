@@ -1,0 +1,15 @@
+<resources>
+    <string-array name="spinnerItems">
+        <item>Select a search radius</item>
+        <item>1 km</item>
+        <item>2 km</item>
+        <item>3 km</item>
+        <item>4 km</item>
+        <item>5 km</item>
+        <item>6 km</item>
+        <item>7 km</item>
+        <item>8 km</item>
+        <item>9 km</item>
+        <item>10 km</item>
+    </string-array>
+</resources>

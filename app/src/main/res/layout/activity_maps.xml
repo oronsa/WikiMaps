@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/background">
+
+        <Spinner
+            android:id="@+id/radius_spinner"
+            android:entries="@array/spinnerItems"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:focusable="true"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@android:color/transparent"
+            android:spinnerMode="dropdown"
+            android:layout_width="0dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="showDropDown"
+            android:src="@mipmap/arrow" />
+    </LinearLayout>
+
+    <Button
+        android:background="@drawable/background"
+        android:text="@string/search"
+        android:textAllCaps="false"
+        android:enabled="false"
+        android:id="@+id/start_search"
+        android:textSize="15sp"
+        android:layout_height="45dp"
+        android:layout_width="match_parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="8"
+        android:layout_height="0dp"
+        android:orientation="vertical">
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            tools:layout="@layout/place_autocomplete_fragment">
+        </fragment>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="#D3D3D3"
+        android:layout_width="match_parent"
+        android:id="@+id/layout_footer">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/footer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/footer"/>
+        </android.support.v7.widget.Toolbar>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/history_header"
+        android:background="#00CCFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/header"/>
+    </android.support.v7.widget.Toolbar>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="115"
+        android:id="@+id/no_results_image"
+        android:visibility="gone"
+        android:src="@drawable/noresults"/>
+    <ListView
+        android:divider="#b5b5b5"
+        android:dividerHeight="1dp"
+        android:listSelector="@drawable/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="115"
+        android:id="@+id/list_view_history"/>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/footer_layout"
+        android:layout_weight="1"
+        android:background="#D3D3D3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/footer"/>
+    </android.support.v7.widget.Toolbar>
+</LinearLayout>
