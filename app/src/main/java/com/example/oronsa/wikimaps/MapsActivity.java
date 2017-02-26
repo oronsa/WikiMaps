@@ -256,7 +256,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void addItems() throws ExecutionException, InterruptedException, JSONException {
-        Log.i("result:", String.valueOf(tsmresponse.length()));
         int results = tsmresponse.length();
         for (int i = 0; i < results; i++) {
             idList.add(tsmresponse.getJSONObject(i).getString("pageid"));
@@ -453,7 +452,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 JSONObject jsonObject = new JSONObject(result);
                 JSONObject myResponse = jsonObject.getJSONObject("query");
                 tsmresponse = myResponse.getJSONArray("geosearch");
-                Log.i("before add the items:",tsmresponse.toString());
                 mMap.clear();
                 addItems();
             } catch (InterruptedException | ExecutionException | JSONException e) {

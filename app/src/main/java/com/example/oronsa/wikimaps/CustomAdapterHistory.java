@@ -12,6 +12,8 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+// this class defines  a Favorites list using Cursor that includes title and images
+
 class CustomAdapterHistory extends CursorAdapter {
 
     CustomAdapterHistory(Context context, Cursor cursor) {

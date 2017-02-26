@@ -12,7 +12,9 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
- class CustomAdapterFavorites extends CursorAdapter {
+// this class defines  a History list using Cursor that includes title, image and date
+
+class CustomAdapterFavorites extends CursorAdapter {
 
      CustomAdapterFavorites(Context context, Cursor cursor) {
         super(context,cursor,0);

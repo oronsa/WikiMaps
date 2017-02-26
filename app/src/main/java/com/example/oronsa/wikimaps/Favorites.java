@@ -29,6 +29,7 @@ public class Favorites extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.favorites);
+
         databaseHelper = new DatabaseHelper(this);
         final ListView listView = (ListView) findViewById(R.id.list_view_favorites);
         TextView favorites_footer = (TextView) findViewById(R.id.favorites_footer_tv);
@@ -37,6 +38,7 @@ public class Favorites extends Activity {
         ImageView image_result = (ImageView) findViewById(R.id.no_results_image);
         TextView header_title = (TextView) findViewById(R.id.header_title);
         ImageView trash = (ImageView)findViewById(R.id.trash_image);
+
         header_title.setText(R.string.header_title_favorites);
         favorites_footer.setTextColor(Color.parseColor("#02adef"));
         favorites_footer.setCompoundDrawablesWithIntrinsicBounds(0, R.mipmap.favorites_blue, 0, 0);
@@ -114,13 +116,11 @@ public class Favorites extends Activity {
                         int latColIndex = cursor.getColumnIndex("LAT");
                         while (cursor.moveToNext()) {
                             location.setLatitude(Double.parseDouble(cursor.getString(latColIndex)));
-                            Log.i("lan:", String.valueOf(location.getLatitude()));
                         }
                         cursor = databaseHelper.titleQueryFavorites(((TextView) view.findViewById(R.id.item_title_favorites)).getText().toString());
                         int lonColIndex = cursor.getColumnIndex("LON");
                         while (cursor.moveToNext()) {
                             location.setLongitude(Double.parseDouble(cursor.getString(lonColIndex)));
-                            Log.i("lon:", String.valueOf(location.getLongitude()));
                         }
                         if(location.getLongitude() != 0 && location.getLatitude() != 0)
                             openGoogleMap(location);

@@ -20,6 +20,7 @@ public class History extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history);
+
         databaseHelper = new DatabaseHelper(this);
         ListView listView = (ListView)findViewById(R.id.list_view_history);
         TextView favorites_footer = (TextView) findViewById(R.id.favorites_footer_tv);
@@ -28,6 +29,7 @@ public class History extends Activity{
         ImageView image_result = (ImageView) findViewById(R.id.no_results_image);
         TextView header_title = (TextView) findViewById(R.id.header_title);
         ImageView trash = (ImageView)findViewById(R.id.trash_image);
+
         header_title.setText(R.string.header_title_history);
         favorites_footer.setCompoundDrawablesWithIntrinsicBounds(0, R.mipmap.favorites_black, 0, 0);
         history_footer.setCompoundDrawablesWithIntrinsicBounds(0, R.mipmap.history_blue_icon, 0, 0);

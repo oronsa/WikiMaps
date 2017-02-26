@@ -20,8 +20,8 @@ import android.widget.Toast;
 public class LocationService extends Service {
 
     private LocationManager locationManager;
-    final long MIN_TIME_FOR_UPDATE = 5000; //check myLocation every 5 seconds
-    final float MIN_DIS_FOR_UPDATE = 100.00f;//check myLocation every 100 meter
+    final long MIN_TIME_FOR_UPDATE = 30000; //check myLocation every 30 seconds
+    final float MIN_DIS_FOR_UPDATE = 1000.00f;//check myLocation every 1000 meter (1 kilometer)
     private int radius;
     //Strings to register to create intent filter for registering the receivers
     private static final String ACTION_STRING_SERVICE = "ToService";
@@ -109,7 +109,6 @@ public class LocationService extends Service {
     String buildUrlPath(Location myLocation) {
         double lat = myLocation.getLatitude();
         double lon = myLocation.getLongitude();
-        Log.i("radius", String.valueOf(radius));
         return  "https://en.wikipedia.org/w/api.php?action=query&list=geosearch&gsradius="+radius+"" +
                 "&gscoord="+lat+"%7C"+lon+"&format=json&gslimit=500";
     }
@@ -131,7 +130,6 @@ public class LocationService extends Service {
         }
         stopSelf();
         locationManager.removeUpdates(locationListener);
-        Log.d("Service", "onDestroy");
         unregisterReceiver(serviceReceiver);
     }
 
