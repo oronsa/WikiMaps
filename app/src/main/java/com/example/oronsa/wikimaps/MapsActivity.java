@@ -82,6 +82,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private BroadcastReceiver activityReceiver = new BroadcastReceiver() {
 
         @Override
+        //When broadcast is received
         public void onReceive(Context context, Intent intent) {
             idList = new ArrayList<>();
             distList = new ArrayList<>();
@@ -168,6 +169,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 startService(intent);
             }
         });
+        //Moving to new intent by clicking the footer icons
         favorites_footer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -186,11 +188,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
+    //When the map is ready we set the start location to israel and than handle in onMarkerClick function
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        // Add a marker in Sydney and move the camera
         LatLng israel = new LatLng(31.046051, 34.851612);
-//        mMap.addMarker(new MarkerOptions().position(israel).title("Marker in israel"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(israel));
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -214,12 +215,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 open_new.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.new_tab_info, 0, 0, 0);
                 favorites.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.favorites_blue, 0, 0, 0);
                 curMarker = marker;
-                new GetImageTask(MapsActivity.this).execute(imagePath);
+                new HandleClick(MapsActivity.this).execute(imagePath);
                 return true;
             }
         });
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
@@ -254,7 +254,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return maxRadius = arr[0];
 
     }
-
+    //get all results and set them on map (using add marker)
     private void addItems() throws ExecutionException, InterruptedException, JSONException {
         int results = tsmresponse.length();
         for (int i = 0; i < results; i++) {
@@ -278,11 +278,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         new_intent.setAction(ACTION_STRING_SERVICE);
         sendBroadcast(new_intent);
     }
-    private String getImageUrl(String title) {
-        String temp1 =title.replaceAll(" ","%20");
+    // fix the signs on path, allow as to get the correct page on web
+    private String getImageUrl(String path) {
+        String temp1 =path.replaceAll(" ","%20");
         String temp2 =temp1.replaceAll("'","%27");
         return "https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&titles="+temp2;
     }
+    //open google map and navigate to destination from current location
     public void navGoogleMap(Location destLocation){
         Intent navigation = new Intent(Intent.ACTION_VIEW, Uri
                 .parse("http://maps.google.com/maps?saddr="
@@ -292,6 +294,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         navigation.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
         startActivity(navigation);
     }
+    //open the value of current page on wiki
     private void openWiki(String title) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse
                 ("http://en.wikipedia.org/wiki/" + title));
@@ -312,10 +315,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return  Base64.encodeToString(bytes, Base64.DEFAULT);
 
     }
-
-    class GetImageTask extends AsyncTask<String, String, String> {
+    //Async task for the open window when we click on markers
+    class HandleClick extends AsyncTask<String, String, String> {
         Context context ;
-        GetImageTask(Context context) {
+        HandleClick(Context context) {
             this.context = context;
         }
         @Override
@@ -419,6 +422,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
     }
+    //Async task for all the results that back to as from query by location
     class GetDataTask extends AsyncTask<String, String, String> {
         Context context ;
         GetDataTask(Context context) {
@@ -486,7 +490,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return result.toString();
         }
     }
-
+// Async task that handle in the image of each value
     class DownloadImagesTask extends AsyncTask<String, Void, Bitmap> {
 
         private Context context ;
@@ -508,7 +512,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Bitmap bm = null;
             try {
                 bm= Picasso.with(context).load(urls[0]).resize(100,100).get();
-            } catch (IOException e) {
+            }
+            // if we can't download the photo we replace this with wikipedia icon
+            catch (IOException e) {
                 urls[0]="https://d8nz9a88rwsc9.cloudfront.net/wp-content/uploads/2014/01/wikipedia.jpg";
                 try {
                     bm= Picasso.with(context).load(urls[0]).resize(100,100).get();
@@ -529,6 +535,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 currStringImage = bitmapToString(result);
                 Cursor c = databaseHelper.titleQueryHistory(curMarker.getTitle());
+
+                // create new line on history page
                 if(c.getCount()==0) {
                     Date currDate = new Date();
                     String fDate = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault()).format(currDate);
